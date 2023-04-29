@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script>  
+
+function validateform(){
+    const email = document.getElementById("email").value;
+    if (email == "") {
+        document.getElementById("EmailErr").innerHTML = "Email can't be blank";
+        document.getElementById("email").style.borderColor = "red";
+    } else {
+        // Send an AJAX request to the server to check if the email exists
+        const xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                const response = JSON.parse(this.responseText);
+                if (response.exists) {
+                    document.getElementById("EmailErr").innerHTML = "";
+                    document.getElementById("email").style.borderColor = "black";
+                } else {
+                    document.getElementById("EmailErr").innerHTML = "Email doesn't exist in the database";
+                    document.getElementById("email").style.borderColor = "red";
+                }
+            }
+        };
+        xhr.open("GET", `../Controller/ForgetPassController.php?email=${email}`, true);
+        xhr.send();
+    }
+}
+
+
+		function checkEmail(){
+        if (document.getElementById("email").value == "") {
+              document.getElementById("EmailErr").innerHTML = "Email can't be blank";
+              document.getElementById("email").style.borderColor = "red";
+        }else{
+            document.getElementById("EmailErr").innerHTML = "";
+              document.getElementById("email").style.borderColor = "black";
+        }
+    }
+    function checkPass(){
+        	if (document.getElementById("newpassword").value == "") {
+			  	document.getElementById("NewpassErr").innerHTML = "Password can't be blank";
+			  	document.getElementById("newpassword").style.borderColor = "red";
+			}else{
+				document.getElementById("NewpassErr").innerHTML = "";
+			  	document.getElementById("newpassword").style.borderColor = "black";
+			}
+        }
+    function checkPass(){
+        	if (document.getElementById("retypenewpassword").value == "") {
+			  	document.getElementById("RetyNewpassErr").innerHTML = "Password can't be blank";
+			  	document.getElementById("retypenewpassword").style.borderColor = "red";
+			}else{
+				document.getElementById("RetyNewpassErr").innerHTML = "";
+			  	document.getElementById("retypenewpassword").style.borderColor = "black";
+			}
+        }
+</script>  
+</head>
+<title>Login form</title> 
+
+</head>
+<body>
+    <br />
+    <div>  
+        <fieldset>
+            <legend><b>Log In</b></legend>                
+            <center>
+                <form name="myform" method="post" action="../Controller/ForgetPassController.php" onsubmit="return validateform()"> 
+                    Email: <input type="text" id="email" name="email" placeholder="Enter Email" onblur="checkEmail()" required>
+                    <p id="EmailErr"></p> 
+                    New Password: <input type="password" id="newpassword" name="newpassword" placeholder="Enter New Password" onblur="checkPass()"  required>
+                    <p id="NewpassErr"></p>
+                    Retype New Password: <input type="password" id="retypenewpassword" name="retypenewpassword" placeholder="Enter New Password Again" onblur="checkPass()"  required>
+                    <p id="RetyNewpassErr"></p>
+                    <input type="submit" value="register"></br>
+                    <a href="Login.html">Log In</a>  
+                </form>  
+            </center>
+        </fieldset>
+    </div>
+</body>
+</html>

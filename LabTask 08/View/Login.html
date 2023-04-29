@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script>  
+
+
+   
+
+		function checkUName(){
+        if (document.getElementById("username").value == "") {
+              document.getElementById("UsernErr").innerHTML = "Username can't be blank";
+              document.getElementById("username").style.borderColor = "red";
+        }else{
+            document.getElementById("unameErr").innerHTML = "";
+              document.getElementById("UsernErr").style.borderColor = "black";
+        }
+    }
+    function checkPass(){
+        	if (document.getElementById("password").value == "") {
+			  	document.getElementById("passErr").innerHTML = "Password can't be blank";
+			  	document.getElementById("password").style.borderColor = "red";
+			}else{
+				document.getElementById("passErr").innerHTML = "";
+			  	document.getElementById("password").style.borderColor = "black";
+			}
+        }
+</script>  
+</head>
+<title>Login form</title> 
+
+</head>
+<body>
+    <br />
+    <div>  
+        <fieldset>
+            <legend><b>Log In</b></legend>                
+            <center>
+                <form name="myform" method="post" action="" onsubmit="return validateform()"> 
+                    UserName: <input type="text" id="username" name="username" placeholder="Enter UserName" onblur="checkUName()" required>
+                    <p id="UsernErr"></p> 
+                    Password: <input type="password" id="password" name="password" placeholder="Enter Password" onblur="checkPass()"  required>
+                    <p id="passErr"></p>
+                    <input type="submit" value="register"></br>
+                    <a href="Registration.html">Don't Have Account?</a>  
+                    <a href="TOForgetPass.html">Forget Password?</a>
+                </form>  
+            </center>
+        </fieldset>
+    </div>
+</body>
+</html>
